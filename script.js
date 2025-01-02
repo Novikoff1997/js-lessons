@@ -3,7 +3,7 @@ let screens = prompt("Какие типы экранов нужно разраб
 let screenPrice = +prompt("Сколько будет стоить данная работа?");
 let rollback = 10;
 let fullPrice = 100000000;
-let adaptive = !!prompt("Нужен ли адаптив на сайте?");
+let adaptive = confirm("Нужен ли адаптив на сайте?");
 
 let service1 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice1 = parseInt(+prompt("Сколько это будет стоить?"));
