@@ -15,23 +15,23 @@ const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
 const getAllServicePrices = function () {
-  allServicePrices = servicePrice1 + servicePrice2;
-  return allServicePrices;
+  return servicePrice1 + servicePrice2;
 };
+allServicePrices = getAllServicePrices();
 
 function getFullPrice() {
-  fullPrice = screenPrice + getAllServicePrices();
-  return fullPrice;
+  return screenPrice + allServicePrices;
 }
+fullPrice = getFullPrice();
 
 const getTitle = function (title) {
   const trimmedTitle = title.trim();
   return trimmedTitle.charAt(0).toUpperCase() + trimmedTitle.slice(1);
 };
 const getServicePercentPrices = function () {
-  servicePercentPrice = fullPrice - fullPrice * (rollback / 100);
-  return servicePercentPrice;
+  return fullPrice - fullPrice * (rollback / 100);
 };
+servicePercentPrice = getServicePercentPrices;
 
 const getRollackMessage = function () {
   if (fullPrice > 30000) {
@@ -47,7 +47,6 @@ const getRollackMessage = function () {
   }
 };
 
-getFullPrice();
 showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
