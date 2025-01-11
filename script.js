@@ -10,8 +10,7 @@ let service1;
 let service2;
 
 const isNumber = function (num) {
-  num = +num;
-  return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
+  return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
 const asking = function () {
