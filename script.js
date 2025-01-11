@@ -1,37 +1,62 @@
-let title = prompt("Как называется ваш проект?");
-let screens = prompt("Какие типы экранов нужно разработать?");
-let screenPrice = +prompt("Сколько будет стоить данная работа?");
-let adaptive = confirm("Нужен ли адаптив на сайте?");
-let service1 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice1 = +prompt("Сколько это будет стоить?");
-let service2 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice2 = +prompt("Сколько это будет стоить?");
+let title;
+let screens;
+let screenPrice;
+let adaptive;
 let rollback = 10;
 let fullPrice;
 let allServicePrices;
 let servicePercentPrice;
+let service1;
+let service2;
+
+const isNumber = function (num) {
+  num = +num;
+  return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
+};
+
+const asking = function () {
+  title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+  screens = prompt("Какие типы экранов нужно разработать?", "Простые, сдлжные, интерактивные");
+  do {
+    screenPrice = prompt("Сколько будет стоить данная работа?");
+    screenPrice = parseFloat(screenPrice);
+  } while (isNumber(screenPrice) !== true);
+  adaptive = confirm("Нужен ли адаптив на сайте?");
+};
 
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
+
 const getAllServicePrices = function () {
-  return servicePrice1 + servicePrice2;
+  let sum = 0;
+  let ask;
+  for (let i = 0; i < 2; i++) {
+    if (i === 0 || i === 1) {
+      prompt("Какой дополнительный тип услуги нужен?");
+      ask = +prompt("Сколько это будет стоить?");
+      if (isNumber(ask) === true) {
+        sum += ask;
+      } else {
+        i--;
+      }
+    }
+  }
+  return sum;
 };
-allServicePrices = getAllServicePrices();
 
 function getFullPrice() {
   return screenPrice + allServicePrices;
 }
-fullPrice = getFullPrice();
 
-const getTitle = function (title) {
+const getTitle = function () {
   const trimmedTitle = title.trim();
   return trimmedTitle.charAt(0).toUpperCase() + trimmedTitle.slice(1);
 };
+
 const getServicePercentPrices = function () {
   return fullPrice - fullPrice * (rollback / 100);
 };
-servicePercentPrice = getServicePercentPrices;
 
 const getRollackMessage = function () {
   if (fullPrice > 30000) {
@@ -46,13 +71,19 @@ const getRollackMessage = function () {
     console.log("Что то пошло не так!");
   }
 };
+asking();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getServicePercentPrices();
+title = getTitle();
 
 showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
 getRollackMessage();
 
-console.log(getTitle(title));
-console.log("Итоговая стоимость за вычетом отката посреднику:" + getServicePercentPrices());
+console.log("allServicePrices: " + allServicePrices);
+console.log(title);
+console.log("Итоговая стоимость за вычетом отката посреднику:" + servicePercentPrice);
 console.log(screens.toLowerCase().split(", "));
-console.log("Полная стоимость работы: " + getFullPrice());
+console.log("Полная стоимость работы: " + fullPrice);
