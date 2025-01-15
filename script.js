@@ -89,11 +89,9 @@ const appData = {
 
     appData.logger();
   },
-  // Тут если я правильно понял задание:
-  // "Вывести в консоль в методе logger ВСЕ свой-ва и методы объекта через цикл for in"
-  // Ну выходит что вот так:
   logger: function () {
     console.log(appData.getRollackMessage(appData.fullPrice));
+    console.log(appData.title);
 
     console.log(appData.fullPrice);
     console.log(appData.servicePercentPrice);
